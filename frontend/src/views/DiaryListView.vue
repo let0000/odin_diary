@@ -47,7 +47,11 @@
         <div>
           <div class="tab_content my-3 container">
             <!-- TimeLine item 1-->
-            <div class="row text-start">
+            <div
+              class="row text-start"
+              :key="i"
+              v-for="(groupBy, i) in groupByData"
+            >
               <div class="col-auto text-center flex-column d-none d-sm-flex">
                 <div class="row h-50">
                   <div class="col">&nbsp;</div>
@@ -65,22 +69,34 @@
               </div>
               <div class="col-10 mx-auto py-2 mb-3">
                 <div class="card border-primary shadow">
-                  <div class="card-header text-primary">2023-01-16</div>
+                  <div class="card-header text-primary">
+                    {{ groupBy[0].date }}
+                  </div>
                   <div class="card-body ms-2">
-                    <h4 class="card-text mb-3">
-                      1 : 2,930 <span class="text-success">( + 130 )</span>
-                    </h4>
-                    <h4 class="card-text">
-                      2 : 4,600 <span class="text-success">( + 130 )</span>
+                    <h4
+                      class="card-text mb-3"
+                      :key="i"
+                      v-for="(dateList, i) in groupBy"
+                    >
+                      {{ dateList.account }} : {{ dateList.dia }}
+                      <span class="text-success">( + 130 )</span>
                     </h4>
                     <hr />
-                    <p class="card-text text-muted">
-                      1 : 무기 5 (0) , 방어구 15 (1) , 장신구 2 (0) , 유물 3 (1)
-                      , 세공석 7 , 기타 : O
-                    </p>
-                    <p class="card-text text-muted">
-                      2 : 무기 4 (1) , 방어구 13 (0) , 장신구 1 (0) , 유물 4 (0)
-                      , 세공석 9 , 기타 : x
+                    <p
+                      class="card-text text-muted"
+                      :key="i"
+                      v-for="(dateList, i) in groupBy"
+                    >
+                      {{ dateList.account }} : 무기
+                      {{ dateList.totalweapon }} ({{ dateList.totalweapon_a }})
+                      , 방어구 {{ dateList.totalarmor }} ({{
+                        dateList.totalarmor_a
+                      }}) , 장신구 {{ dateList.totalaccessory }} ({{
+                        dateList.totalaccessory_a
+                      }}) , 유물 {{ dateList.totalrelic }} ({{
+                        dateList.totalrelic_a
+                      }}) , 세공석 {{ dateList.totalworkmanship }} , 기타 :
+                      {{ dateList.totaletc == null ? "X" : "O" }}
                     </p>
                   </div>
                 </div>
@@ -124,43 +140,6 @@
               </div>
             </div>
             <!-- end TimeLine Item 2-->
-            <!-- TimeLine item 3-->
-            <div class="row text-start">
-              <div class="col-auto text-center flex-column d-none d-sm-flex">
-                <div class="row h-50">
-                  <div class="col border-end">&nbsp;</div>
-                  <div class="col">&nbsp;</div>
-                </div>
-                <h5 class="m-2">
-                  <span class="badge rounded-circle bg-light border"
-                    >&nbsp;</span
-                  >
-                </h5>
-                <div class="row h-50">
-                  <div class="col border-end">&nbsp;</div>
-                  <div class="col">&nbsp;</div>
-                </div>
-              </div>
-              <div class="col-10 mx-auto py-2 mb-3">
-                <div class="card shadow">
-                  <div class="card-header">2023-01-16</div>
-                  <div class="card-body ms-2">
-                    <h4 class="card-text mb-3">1 : 2,930 ( + 130 )</h4>
-                    <h4 class="card-text">2 : 4,600 ( + 300 )</h4>
-                    <hr />
-                    <p class="card-text text-muted">
-                      1 : 무기 5 (0) , 방어구 15 (1) , 장신구 2 (0) , 유물 3 (1)
-                      , 세공석 7 , 기타 : O
-                    </p>
-                    <p class="card-text text-muted">
-                      2 : 무기 4 (1) , 방어구 13 (0) , 장신구 1 (0) , 유물 4 (0)
-                      , 세공석 9 , 기타 : x
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- end TimeLine Item 3-->
           </div>
           <div class="tab-content my-3 container">
             <div class="row text-start">
@@ -230,13 +209,41 @@ export default {
   components: {},
   data() {
     return {
-      sampleData: "",
+      diaryList: [],
+      groupByData: [],
+      today: new Date(),
     };
   },
   setup() {},
-  created() {},
+  created() {
+    this.getDiaryList();
+  },
   mounted() {},
   unmounted() {},
-  methods: {},
+  methods: {
+    async getDiaryList() {
+      this.diaryList = await this.$api("/api/diaryList", {
+        param: ["wlsgh8309@naver.com"],
+      });
+      console.log(this.diaryList);
+
+      const groupBy = function (data, key) {
+        return data.reduce(function (carry, el) {
+          var group = el[key];
+
+          if (carry[group] === undefined) {
+            carry[group] = [];
+          }
+
+          carry[group].push(el);
+          return carry;
+        }, {});
+      };
+
+      this.groupByData = groupBy(this.diaryList, "date");
+      console.log(this.groupByData);
+      console.log(this.today);
+    },
+  },
 };
 </script>
