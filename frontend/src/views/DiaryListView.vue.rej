@@ -1,0 +1,14 @@
+diff a/frontend/src/views/DiaryListView.vue b/frontend/src/views/DiaryListView.vue	(rejected hunks)
+@@ -47,7 +47,11 @@
+         <div>
+           <div class="tab_content my-3 container">
+             <!-- TimeLine item 1-->
+-            <div class="row text-start">
++            <div
++              class="row text-start"
++              :key="i"
++              v-for="(groupBy, i) in groupByData"
++            >
+               <div class="col-auto text-center flex-column d-none d-sm-flex">
+                 <div class="row h-50">
+                   <div class="col">&nbsp;</div>
