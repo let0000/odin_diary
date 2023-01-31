@@ -1,1 +1,1 @@
-# odin_parming
+# odin_diary
