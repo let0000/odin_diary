@@ -2,11 +2,11 @@ module.exports = {
   userList: {
     query: "select * from `odin-user`",
   },
-  diaryList: {
+  dataList: {
     query:
-      "select email , date, account, sum(weapon) as totalweapon, sum(weapon_a) as totalweapon_a, sum(armor) as totalaromor, sum(armor_a) as totalarmor_a, sum(accessory) as totalaccessory, sum(accessory_a) as totalaccessory_a, sum(relic) as totalrelic, sum(relic_a) as totalrelic_a, sum(workmanship) as totalworkmanship, group_concat(etc) as totaletc, dia from `odin-data` where email = ? group by date DESC, account;",
+      "select email , date, account, sum(weapon) as totalweapon, sum(weapon_a) as totalweapon_a, sum(armor) as totalaromor, sum(armor_a) as totalarmor_a, sum(accessory) as totalaccessory, sum(accessory_a) as totalaccessory_a, sum(relic) as totalrelic, sum(relic_a) as totalrelic_a, sum(workmanship) as totalworkmanship, group_concat(etc) as totaletc, dia from `odin-data` where email = ? group by date DESC, account; ",
   },
-  diaryDetail: {
+  dataDetail: {
     query: "select * from `odin-data` where date = ? and email = ?;",
   },
   DataInsert: {
