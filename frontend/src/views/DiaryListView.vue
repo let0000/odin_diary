@@ -16,6 +16,7 @@
                 id="list"
                 autocomplete="off"
                 checked
+                @click="timelineClick"
               />
               <label class="btn btn-outline-primary" for="list">
                 <i class="bi bi-list-ul"></i>
@@ -27,6 +28,7 @@
                 name="btnradio"
                 id="calender"
                 autocomplete="off"
+                @click="cardClick"
               />
               <label class="btn btn-outline-primary" for="calender">
                 <i class="bi bi-grid-fill"></i>
@@ -45,7 +47,7 @@
         </div>
         <hr />
         <div>
-          <div class="tab_content my-3 container">
+          <div class="my-3 container" v-if="timeline">
             <!-- TimeLine item 1-->
             <div
               class="row text-start"
@@ -70,7 +72,7 @@
               <div class="col-10 mx-auto py-2 mb-3">
                 <div class="card border-primary shadow">
                   <div class="card-header text-primary">
-                    {{ groupBy[0].date }}
+                    {{ getDateFormat(groupBy[0].date) }}
                   </div>
                   <div class="card-body ms-2">
                     <h4
@@ -141,19 +143,25 @@
             </div>
             <!-- end TimeLine Item 2-->
           </div>
-          <div class="tab-content my-3 container">
+          <div class="my-3 container" v-if="card">
             <div class="row text-start">
-              <div class="col-6 col-lg-4">
+              <div
+                class="col-6 col-lg-4"
+                :key="i"
+                v-for="(groupBy, i) in groupByData"
+              >
                 <div class="card mb-3 border-primary">
                   <div class="card-body">
                     <h4 class="card-title ms-1 mb-2 text-primary">
-                      2023-01-16
+                      {{ getDateFormat(groupBy[0].date) }}
                     </h4>
-                    <p class="card-text m-2 fs-4">
-                      1 : 2,130 <span class="text-success">(+ 130)</span>
-                    </p>
-                    <p class="card-text m-2 fs-4">
-                      2 : 4,600 <span class="text-success">(+ 300)</span>
+                    <p
+                      class="card-text m-2 fs-4"
+                      :key="i"
+                      v-for="(dateList, i) in groupBy"
+                    >
+                      {{ dateList.account }} : {{ dateList.dia }}
+                      <span class="text-success">(+ 130)</span>
                     </p>
                   </div>
                 </div>
@@ -205,6 +213,8 @@
   </div>
 </template>
 <script>
+import moment from "moment/moment";
+
 export default {
   components: {},
   data() {
@@ -212,6 +222,8 @@ export default {
       diaryList: [],
       groupByData: [],
       today: new Date(),
+      timeline: true,
+      card: false,
     };
   },
   setup() {},
@@ -221,6 +233,21 @@ export default {
   mounted() {},
   unmounted() {},
   methods: {
+    getDateFormat(date, format = "YYYY-MM-DD") {
+      return moment(date).format(format);
+    },
+    timelineClick() {
+      this.timeline = true;
+      if (this.timeline) {
+        this.card = false;
+      }
+    },
+    cardClick() {
+      this.card = true;
+      if (this.card) {
+        this.timeline = false;
+      }
+    },
     async getDiaryList() {
       this.diaryList = await this.$api("/api/diaryList", {
         param: ["wlsgh8309@naver.com"],
