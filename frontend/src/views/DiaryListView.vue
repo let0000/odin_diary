@@ -42,7 +42,11 @@
             </button>
           </div>
           <div class="me-3">
-            <input type="date" class="form-control border-primary me-2" />
+            <input
+              type="date"
+              @input="changeDay($event)"
+              class="form-control border-primary me-2"
+            />
           </div>
         </div>
         <hr />
@@ -56,13 +60,32 @@
             >
               <div class="col-auto text-center flex-column d-none d-sm-flex">
                 <div class="row h-50">
-                  <div class="col">&nbsp;</div>
+                  <div
+                    class="col"
+                    :class="
+                      getDateFormat(groupBy[0].date) !=
+                      getDateFormat(new Date())
+                        ? 'border-end'
+                        : ''
+                    "
+                  >
+                    &nbsp;
+                  </div>
                   <div class="col">&nbsp;</div>
                 </div>
                 <h5 class="m-2">
-                  <span class="badge rounded-circle bg-primary border-primary"
+                  <span
+                    class="badge rounded-circle border"
+                    :class="
+                      getDateFormat(groupBy[0].date) == getDateFormat(focusday)
+                        ? 'bg-primary border-primary'
+                        : ''
+                    "
                     >&nbsp;</span
                   >
+                  <!-- <span class="badge rounded-circle bg-primary border-primary"
+                    >&nbsp;</span
+                  > -->
                 </h5>
                 <div class="row h-50">
                   <div class="col border-end">&nbsp;</div>
@@ -70,8 +93,23 @@
                 </div>
               </div>
               <div class="col-10 mx-auto py-2 mb-3">
-                <div class="card border-primary shadow">
-                  <div class="card-header text-primary">
+                <div
+                  :id="getDateFormat(groupBy[0].date)"
+                  class="card border shadow"
+                  :class="
+                    getDateFormat(groupBy[0].date) == getDateFormat(focusday)
+                      ? 'border-primary'
+                      : ''
+                  "
+                >
+                  <div
+                    class="card-header"
+                    :class="
+                      getDateFormat(groupBy[0].date) == getDateFormat(focusday)
+                        ? 'text-primary'
+                        : ''
+                    "
+                  >
                     {{ getDateFormat(groupBy[0].date) }}
                   </div>
                   <div class="card-body ms-2">
@@ -105,43 +143,6 @@
               </div>
             </div>
             <!-- end TimeLine Item 1-->
-            <!-- TimeLine item 2-->
-            <div class="row text-start">
-              <div class="col-auto text-center flex-column d-none d-sm-flex">
-                <div class="row h-50">
-                  <div class="col border-end">&nbsp;</div>
-                  <div class="col">&nbsp;</div>
-                </div>
-                <h5 class="m-2">
-                  <span class="badge rounded-circle bg-light border"
-                    >&nbsp;</span
-                  >
-                </h5>
-                <div class="row h-50">
-                  <div class="col border-end">&nbsp;</div>
-                  <div class="col">&nbsp;</div>
-                </div>
-              </div>
-              <div class="col-10 mx-auto py-2 mb-3">
-                <div class="card shadow">
-                  <div class="card-header">2023-01-16</div>
-                  <div class="card-body ms-2">
-                    <h4 class="card-text mb-3">1 : 2,930 ( + 130 )</h4>
-                    <h4 class="card-text">2 : 4,600 ( + 300 )</h4>
-                    <hr />
-                    <p class="card-text text-muted">
-                      1 : 무기 5 (0) , 방어구 15 (1) , 장신구 2 (0) , 유물 3 (1)
-                      , 세공석 7 , 기타 : O
-                    </p>
-                    <p class="card-text text-muted">
-                      2 : 무기 4 (1) , 방어구 13 (0) , 장신구 1 (0) , 유물 4 (0)
-                      , 세공석 9 , 기타 : x
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- end TimeLine Item 2-->
           </div>
           <div class="my-3 container" v-if="card">
             <div class="row text-start">
@@ -150,9 +151,25 @@
                 :key="i"
                 v-for="(groupBy, i) in groupByData"
               >
-                <div class="card mb-3 border-primary">
+                <div
+                  :id="getDateFormat(groupBy[0].date)"
+                  class="card mb-3"
+                  :class="
+                    getDateFormat(groupBy[0].date) == getDateFormat(focusday)
+                      ? 'border-primary'
+                      : ''
+                  "
+                >
                   <div class="card-body">
-                    <h4 class="card-title ms-1 mb-2 text-primary">
+                    <h4
+                      class="card-title ms-1 mb-2"
+                      :class="
+                        getDateFormat(groupBy[0].date) ==
+                        getDateFormat(focusday)
+                          ? 'text-primary'
+                          : ''
+                      "
+                    >
                       {{ getDateFormat(groupBy[0].date) }}
                     </h4>
                     <p
@@ -162,45 +179,6 @@
                     >
                       {{ dateList.account }} : {{ dateList.dia }}
                       <span class="text-success">(+ 130)</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-6 col-lg-4">
-                <div class="card mb-3">
-                  <div class="card-body">
-                    <h4 class="card-title ms-1 mb-2">2023-01-16</h4>
-                    <p class="card-text m-2 fs-4">
-                      1 : 2,130 <span class="text-success">(+ 130)</span>
-                    </p>
-                    <p class="card-text m-2 fs-4">
-                      2 : 4,600 <span class="text-success">(+ 300)</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-6 col-lg-4">
-                <div class="card mb-3">
-                  <div class="card-body">
-                    <h4 class="card-title ms-2 mb-2">2023-01-16</h4>
-                    <p class="card-text m-2 fs-4">
-                      1 : 2,130 <span class="text-success">(+ 130)</span>
-                    </p>
-                    <p class="card-text m-2 fs-4">
-                      2 : 4,600 <span class="text-success">(+ 300)</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-6 col-lg-4">
-                <div class="card mb-3">
-                  <div class="card-body">
-                    <h4 class="card-title ms-2 mb-2">2023-01-16</h4>
-                    <p class="card-text m-2 fs-4">
-                      1 : 2,130 <span class="text-success">(+ 130)</span>
-                    </p>
-                    <p class="card-text m-2 fs-4">
-                      2 : 4,600 <span class="text-success">(+ 300)</span>
                     </p>
                   </div>
                 </div>
@@ -221,9 +199,9 @@ export default {
     return {
       diaryList: [],
       groupByData: [],
-      today: new Date(),
       timeline: true,
       card: false,
+      focusday: new Date(),
     };
   },
   setup() {},
@@ -233,6 +211,11 @@ export default {
   mounted() {},
   unmounted() {},
   methods: {
+    changeDay(event) {
+      this.focusday = event.target.value;
+      console.log(this.focusday);
+      document.getElementById(this.focusday).scrollIntoView(true);
+    },
     getDateFormat(date, format = "YYYY-MM-DD") {
       return moment(date).format(format);
     },
