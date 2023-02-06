@@ -94,6 +94,8 @@
               </div>
               <div class="col-10 mx-auto py-2 mb-3">
                 <div
+                  @click="goToDetail(getDateFormat(groupBy[0].date))"
+                  style="cursor: pointer"
                   :id="getDateFormat(groupBy[0].date)"
                   class="card border shadow"
                   :class="
@@ -249,6 +251,9 @@ export default {
       this.groupByData = groupBy(this.diaryList, "date");
       console.log(this.groupByData);
       console.log(this.today);
+    },
+    goToDetail(date) {
+      this.$router.push({ path: "/detail", query: { date: date } });
     },
   },
 };
