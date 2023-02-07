@@ -121,7 +121,6 @@
                       v-for="(dateList, i) in groupBy"
                     >
                       {{ dateList.account }} : {{ dateList.dia }}
-                      <span class="text-success">( + 130 )</span>
                     </h4>
                     <hr />
                     <p
@@ -180,7 +179,6 @@
                       v-for="(dateList, i) in groupBy"
                     >
                       {{ dateList.account }} : {{ dateList.dia }}
-                      <span class="text-success">(+ 130)</span>
                     </p>
                   </div>
                 </div>

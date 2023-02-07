@@ -5,6 +5,11 @@
 </template>
 <script>
 export default {
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
   components: {},
   data() {
     return {
@@ -13,7 +18,12 @@ export default {
   },
   setup() {},
   created() {},
-  mounted() {},
+  mounted() {
+    if (this.user.email == undefined) {
+      alert("로그인을 해야 이용할 수 있습니다.");
+      this.$router.push({ path: "/" });
+    }
+  },
   unmounted() {},
   methods: {},
 };

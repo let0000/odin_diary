@@ -27,7 +27,6 @@
           <div :key="i" v-for="(dateDetail, i) in groupByData">
             <h4 class="card-text mb-3">
               {{ dateDetail[0].account }} : {{ dateDetail[0].dia }}
-              <span class="text-success">( + 130 )</span>
             </h4>
           </div>
           <div :key="i" v-for="(totaldateDetail, i) in totaldiaryDetail">
