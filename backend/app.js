@@ -80,22 +80,6 @@ app.post("/api/:alias", async (request, res) => {
   }
 });
 
-// app.post("/api/:alias", async (request, res) => {
-//   if (!request.session.email) {
-//     return res.status(401).send({
-//       error: "로그인을 해야합니다.",
-//     });
-//   }
-
-//   try {
-//     res.send(await req.db(request.params.alias));
-//   } catch (error) {
-//     res.status(500).send({
-//       error: err,
-//     });
-//   }
-// });
-
 const req = {
   async db(alias, param = [], where = "") {
     return new Promise((resolve, reject) =>

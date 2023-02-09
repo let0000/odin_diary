@@ -5,11 +5,8 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item" v-if="user.email != undefined">
-            <router-link class="nav-link active" to="/">일기목록</router-link>
-          </li>
-          <li class="nav-item" v-if="user.email != undefined">
-            <router-link class="nav-link active" to="/create"
-              >일기작성</router-link
+            <router-link class="nav-link active" to="/list"
+              >일기목록</router-link
             >
           </li>
         </ul>
@@ -56,6 +53,7 @@ export default {
           console.log(kakao_account);
           this.login(kakao_account);
           alert("로그인 성공!");
+          this.$router.push({ path: "/" });
         },
       });
     },
@@ -77,6 +75,7 @@ export default {
         console.log(response);
         this.$store.commit("user", {});
         alert("로그아웃");
+        this.$router.push({ path: "/" });
       });
     },
   },

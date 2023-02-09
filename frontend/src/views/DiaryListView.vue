@@ -35,6 +35,7 @@
               </label>
             </div>
             <button
+              @click="goToCreate(this.user.email)"
               type="button"
               class="btn btn-outline-primary rounded-circle ms-3"
             >
@@ -153,6 +154,8 @@
                 v-for="(groupBy, i) in groupByData"
               >
                 <div
+                  @click="goToDetail(getDateFormat(groupBy[0].date))"
+                  style="cursor: pointer"
                   :id="getDateFormat(groupBy[0].date)"
                   class="card mb-3"
                   :class="
@@ -194,6 +197,11 @@
 import moment from "moment/moment";
 
 export default {
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
   components: {},
   data() {
     return {
@@ -233,7 +241,7 @@ export default {
     },
     async getDiaryList() {
       this.diaryList = await this.$api("/api/diaryList", {
-        param: ["wlsgh8309@naver.com"],
+        param: [this.user.email],
       });
       console.log(this.diaryList);
       const groupBy = function (data, key) {
@@ -252,6 +260,9 @@ export default {
     },
     goToDetail(date) {
       this.$router.push({ path: "/detail", query: { date: date } });
+    },
+    goToCreate(email) {
+      this.$router.push({ path: "/create", query: { email: email } });
     },
   },
 };

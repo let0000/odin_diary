@@ -11,7 +11,7 @@
             >
               <i class="bi bi-arrow-left"></i>
             </button>
-            <h3 class="mt-2">{{ getDateFormat(today) }}</h3>
+            <h3 class="mt-2">{{ diaryData.date }}</h3>
           </div>
         </div>
         <div class="header_content text-start">
@@ -189,6 +189,7 @@ export default {
     return {
       diaryData: {
         email: this.$route.query.email,
+        date: this.$route.query.date,
         account: 1,
         account_list: 1,
         weapon: 0,
@@ -222,7 +223,7 @@ export default {
   methods: {
     async getDiaryDetail() {
       this.diaryDetail = await this.$api("/api/diaryDetail", {
-        param: [this.getDateFormat(this.today), this.diaryData.email],
+        param: [this.diaryData.date, this.diaryData.email],
       });
       console.log(this.diaryDetail);
       const groupBy = function (data, key) {

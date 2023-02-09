@@ -13,22 +13,22 @@
               <i class="bi bi-arrow-left"></i>
             </button>
             <button
+              @click="goToUpdate(this.user.email, this.date)"
               type="button"
               class="btn btn-outline-primary rounded-circle me-1"
             >
               <i class="bi bi-pencil-square"></i>
-            </button>
-            <button type="button" class="btn btn-outline-danger rounded-circle">
-              <i class="bi bi-trash"></i>
             </button>
           </div>
         </div>
         <div class="header_content text-start">
           <div :key="i" v-for="(dateDetail, i) in groupByData">
             <h4 class="card-text mb-3">
-              {{ dateDetail[0].account }} : {{ dateDetail[0].dia }}
+              {{ dateDetail[0].account }}번 계정 다이아 :
+              {{ dateDetail[0].dia }}
             </h4>
           </div>
+          <div class="mb-4"></div>
           <div :key="i" v-for="(totaldateDetail, i) in totaldiaryDetail">
             <p class="card-text text-muted mb-2 fs-5">
               {{ totaldateDetail.account }} : 무기
@@ -87,6 +87,11 @@
 </template>
 <script>
 export default {
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
   components: {},
   data() {
     return {
@@ -106,7 +111,7 @@ export default {
   methods: {
     async getDiaryDetail() {
       this.diaryDetail = await this.$api("/api/diaryDetail", {
-        param: [this.date, "wlsgh8309@naver.com"],
+        param: [this.date, this.user.email],
       });
       console.log(this.diaryDetail);
       const groupBy = function (data, key) {
@@ -124,12 +129,18 @@ export default {
     },
     async getTotalDiaryDetail() {
       this.totaldiaryDetail = await this.$api("/api/totalDiaryDetail", {
-        param: [this.date, "wlsgh8309@naver.com"],
+        param: [this.date, this.user.email],
       });
       console.log(this.totaldiaryDetail);
     },
     goToList() {
-      this.$router.push({ path: "/" });
+      this.$router.push({ path: "/list" });
+    },
+    goToUpdate(email, date) {
+      this.$router.push({
+        path: "/update",
+        query: { email: email, date: date },
+      });
     },
   },
 };
