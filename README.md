@@ -1,9 +1,12 @@
 # odin_diary
 모바일 게임 오딘을 플레이하면서 하루동안 얻은 아이템들을 기록하는 일기장
 
-<h3>프로젝트 배포 링크: https://port-0-odin-diary-dist-1jx7m2gldba9am1.gksl2.cloudtype.app/</h3>
+## 프로젝트 배포 링크
+https://port-0-odin-diary-dist-1jx7m2gldba9am1.gksl2.cloudtype.app/</h3>
 
-화면 구동 결과
+## 화면 구동 영상
+<img width="80%" src="https://user-images.githubusercontent.com/21376061/218390464-7c903152-7ffa-4a5d-8701-d74b0cd20d24.gif"/>
+
 
 ## backend 실행
 ### backend 폴더로 이동
