@@ -5,7 +5,7 @@
 https://port-0-odin-diary-dist-1jx7m2gldba9am1.gksl2.cloudtype.app/</h3>
 
 ## 화면 구동 영상
-<img width="80%" src="https://user-images.githubusercontent.com/21376061/218390464-7c903152-7ffa-4a5d-8701-d74b0cd20d24.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/21376061/218392015-e198ef26-ee61-4b6e-b3df-0571003a82e6.gif"/>
 
 
 ## backend 실행
