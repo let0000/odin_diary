@@ -121,7 +121,8 @@
                       :key="i"
                       v-for="(dateList, i) in groupBy"
                     >
-                      {{ dateList.account }} : {{ dateList.dia }}
+                      {{ dateList.account }} :
+                      {{ getCurrencyFormat(dateList.dia) }}
                     </h4>
                     <hr />
                     <p
@@ -181,7 +182,8 @@
                       :key="i"
                       v-for="(dateList, i) in groupBy"
                     >
-                      {{ dateList.account }} : {{ dateList.dia }}
+                      {{ dateList.account }} :
+                      {{ getCurrencyFormat(dateList.dia) }}
                     </p>
                   </div>
                 </div>
@@ -219,6 +221,9 @@ export default {
   mounted() {},
   unmounted() {},
   methods: {
+    getCurrencyFormat(value) {
+      return this.$currencyFormat(value);
+    },
     changeDay(event) {
       this.focusday = event.target.value;
       console.log(this.focusday);

@@ -25,7 +25,7 @@
           <div :key="i" v-for="(dateDetail, i) in groupByData">
             <h4 class="card-text mb-3">
               {{ dateDetail[0].account }}번 계정 다이아 :
-              {{ dateDetail[0].dia }}
+              {{ getCurrencyFormat(dateDetail[0].dia) }}
             </h4>
           </div>
           <div class="mb-4"></div>
@@ -109,6 +109,9 @@ export default {
   mounted() {},
   unmounted() {},
   methods: {
+    getCurrencyFormat(value) {
+      return this.$currencyFormat(value);
+    },
     async getDiaryDetail() {
       this.diaryDetail = await this.$api("/api/diaryDetail", {
         param: [this.date, this.user.email],

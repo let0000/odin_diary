@@ -18,7 +18,7 @@
           <div :key="i" v-for="(dateDetail, i) in groupByData">
             <h5 class="card-text mb-3">
               {{ dateDetail[0].account }}번 계정 다이아 :
-              {{ dateDetail[0].dia }}
+              {{ getCurrencyFormat(dateDetail[0].dia) }}
             </h5>
           </div>
         </div>
@@ -200,7 +200,7 @@ export default {
         relic: 0,
         relic_a: 0,
         workmanship: 0,
-        etc: "",
+        etc: null,
         dia: 0,
       },
       today: new Date(),
@@ -220,6 +220,9 @@ export default {
   },
   unmounted() {},
   methods: {
+    getCurrencyFormat(value) {
+      return this.$currencyFormat(value);
+    },
     async getDiaryDetail() {
       this.diaryDetail = await this.$api("/api/diaryDetail", {
         param: [this.getDateFormat(this.today), this.diaryData.email],
@@ -257,7 +260,7 @@ export default {
       this.diaryData.relic = 0;
       this.diaryData.relic_a = 0;
       this.diaryData.workmanship = 0;
-      this.diaryData.etc = "";
+      this.diaryData.etc = null;
       this.diaryData.dia = 0;
     },
     goToList() {
