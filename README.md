@@ -1,6 +1,9 @@
 # odin_diary
 모바일 게임 오딘을 플레이하면서 하루동안 얻은 아이템들을 기록하는 일기장
 
+## 기능
+
+
 ## 프로젝트 배포 링크
 https://port-0-odin-diary-dist-1jx7m2gldba9am1.gksl2.cloudtype.app/</h3>
 
