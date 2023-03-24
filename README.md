@@ -12,14 +12,16 @@
 배포 : [https://port-0-odin-diary-dist-1jx7m2gldba9am1.gksl2.cloudtype.app](https://port-0-odin-diary-dist-1jx7m2gldba9am1.gksl2.cloudtype.app)
 
 <p align='center'>
-    <img src="https://img.shields.io/badge/react-v18.2.0-61DAFB?logo=React"/>
-   <img src="https://img.shields.io/badge/react responsive-v9.0.2-61DAFB?logo=React"/>
-   <img src="https://img.shields.io/badge/@reduxjs/toolkit-^1.9.3-764ABC?logo=Redux"/>
-   <img src="https://img.shields.io/badge/react redux-^8.0.5-764ABC?logo=Redux"/>
-    <img src="https://img.shields.io/badge/@mui/material-^5.11.13-007fff?logo=mui"/>
-   <img src="https://img.shields.io/badge/@mui/icons material-^5.11.11-007fff?logo=mui"/>
-   <img src="https://img.shields.io/badge/axios-^1.3.4-5A29E4?logo=Axios"/>
-   <img src="https://img.shields.io/badge/react kakao maps sdk-^1.1.6-ffcd00?logo=Kakao"/>
+    <img src="https://img.shields.io/badge/vue-v3.2.13-4FC08D?logo=Vue.js"/>
+   <img src="https://img.shields.io/badge/vue cli-v2.9.6-4FC08D?logo=Vue.js"/>
+   <img src="https://img.shields.io/badge/vue router-v4.0.3-4FC08D?logo=Vue.js"/>
+   <img src="https://img.shields.io/badge/vue sweetalert2-v5.0.5-4FC08D?logo=Vue.js"/>
+   <img src="https://img.shields.io/badge/vuex-v4.0.2-4FC08D?logo=Vue.js"/>
+   <img src="https://img.shields.io/badge/vuex persistedstate-v4.1.0-4FC08D?logo=Vue.js"/>
+   <img src="https://img.shields.io/badge/moment-^2.29.4-764ABC"/>
+   <img src="https://img.shields.io/badge/axios-^1.2.6-5A29E4?logo=Axios"/>
+   <img src="https://img.shields.io/badge/bootstrap-^5.2.3-7952B3?logo=Bootstrap"/>
+   <img src="https://img.shields.io/badge/bootstrap icons-^1.10.3-7952B3?logo=Bootstrap"/>
 </p>
     
 ## 🌟 주요 기능
