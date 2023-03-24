@@ -123,3 +123,5 @@
 * 데이터를 관리하는 마리아DB 를 Cloudtype 을 이용하여 배포합니다.
 * Vue에서 dist 파일을 만들어 백엔드와 함께 github 저장소에 저장합니다.
 * Cloudtype 을 이용하여 github 저장소에 저장한 파일을 배포합니다.
+
+배포용 저장소 : [https://github.com/let0000/odin_diary_dist](https://github.com/let0000/odin_diary_dist)
