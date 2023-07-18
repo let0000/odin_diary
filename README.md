@@ -64,10 +64,6 @@
 </p>
 
 
-<p align='center'>
-  <img width='300px' src = "https://user-images.githubusercontent.com/21376061/227172176-dc509dc7-bf9a-4091-9f83-29ff54662aed.png"/>
-</p>
-
 ### 👌 일기 작성
 
 <p align='center'>
